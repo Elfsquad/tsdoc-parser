@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "generate": "tsc generate-docs-from-ts.ts && node generate-docs-from-ts.js"
+  },
+  "dependencies": {
+    "@microsoft/tsdoc": "^0.14.2",
+    "fs": "^0.0.1-security",
+    "typescript": "^5.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30"
+  }
+}
