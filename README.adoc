@@ -41,7 +41,7 @@ Once installed, you can generate an output JSON document containing the parsed T
 
 [source,bash]
 ----
-generate-docs-from-ts {inputFile} {outputFile} [OptionalClass]
+tsdoc-parser {inputFile} {outputFile} [OptionalClass]
 ----
 
 === 📚 From JavaScript/TypeScript
