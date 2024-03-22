@@ -3,7 +3,7 @@ import * as fs from "fs";
 import { parseTypeScriptFile } from "./parser";
 
 if (process.argv.length < 4) {
-  console.error('Usage: generate-docs-from-ts <inputFile> <outputFile> [className]');
+  console.error('Usage: tsdoc-parser <inputFile> <outputFile> [className]');
   process.exit(1);
 }
 
