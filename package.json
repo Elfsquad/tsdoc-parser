@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "name": "@elfsquad/tsdoc-parser",
   "main": "dist/parser.js",
   "scripts": {
