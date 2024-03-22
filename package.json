@@ -1,12 +1,16 @@
 {
   "version": "0.1.0",
   "name": "@elfsquad/tsdoc-parser",
+  "main": "dist/parser.js",
   "scripts": {
     "build": "tsc",
     "generate": "tsc && node ./dist/bin.js"
   },
+  "files": [
+    "dist"
+  ],
   "bin": {
-    "generate-docs-from-ts": "dist/bin.js"
+    "generate-docs-from-ts": "./dist/bin.js"
   },
   "dependencies": {
     "@microsoft/tsdoc": "^0.14.2",
