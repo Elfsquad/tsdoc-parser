@@ -10,7 +10,7 @@
     "dist"
   ],
   "bin": {
-    "generate-docs-from-ts": "./dist/bin.js"
+    "tsdoc-parser": "./dist/bin.js"
   },
   "dependencies": {
     "@microsoft/tsdoc": "^0.14.2",
