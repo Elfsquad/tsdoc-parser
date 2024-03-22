@@ -1,0 +1,186 @@
+= 📦 @elfsquad/tsdoc-parser
+:toc: macro
+:toc-title:
+
+toc::[]
+
+== 🌟 Introduction
+
+`@elfsquad/tsdoc-parser` is a TypeScript utility that leverages the `@microsoft/tsdoc` library to parse TypeScript documentation comments. It includes features such as converting documentation sections to Markdown, extracting example code from comments, and generating type information for function parameters and return types.
+
+== 🚀 Getting Started
+
+To start using `@elfsquad/tsdoc-parser`, you'll need Node.js and npm installed on your system. Follow these steps:
+
+. Clone or download the package repository to your local machine.
+. Navigate to the package directory in your terminal.
+. Run `npm install` to install the package dependencies.
+. Use the provided TypeScript scripts as needed in your projects.
+
+== 💡 Usage
+
+`@elfsquad/tsdoc-parser` can be used in two primary ways:
+
+=== 🖥️ From the Command Line Interface (CLI)
+
+Before you can use `@elfsquad/tsdoc-parser` from the CLI, you need to install it globally on your system or include it in your project dependencies:
+
+[source,bash]
+----
+npm install -g @elfsquad/tsdoc-parser
+----
+
+Alternatively, if you're including it as part of a project:
+
+[source,bash]
+----
+npm install @elfsquad/tsdoc-parser --save-dev
+----
+
+Once installed, you can generate an output JSON document containing the parsed TypeScript documentation by running:
+
+[source,bash]
+----
+generate-docs-from-ts {inputFile} {outputFile} [OptionalClass]
+----
+
+=== 📚 From JavaScript/TypeScript
+
+To use the package directly in your JavaScript or TypeScript code, import the `parseTypeScriptFile` function and call it as follows:
+
+[source,typescript]
+----
+import { parseTypeScriptFile } from '@elfsquad/tsdoc-parser';
+
+const tsDocComments = parseTypeScriptFile('{inputFile}', '[OptionalClass]');
+console.log(tsDocComments);
+----
+
+== 🌈 Features
+
+`@elfsquad/tsdoc-parser` includes several key features:
+
+- *DocSection Parsing*: Converts sections of TSDoc comments to Markdown format.
+- *Example Code Extraction*: Retrieves example code blocks from TSDoc comments.
+- *Type Information*: Generates human-readable type information for function parameters and return types.
+- *Support for Local Imports*: Parses local imports in TypeScript files to include in the documentation.
+
+== ❗ Limitations
+
+While `@elfsquad/tsdoc-parser` provides valuable tools for parsing TypeScript documentation comments, there are certain limitations:
+
+- *Inline Tag Support*: Currently, the package does not support parsing of all inline TSDoc tags. This may limit the richness of the generated documentation for some use cases.
+- *Advanced Type Parsing*: Complex TypeScript types, such as conditional types or mapped types, may not be fully represented in the generated documentation.
+- *Multi-Language Support*: The tool is primarily designed for English language documentation. Comments in other languages may not be parsed with the same level of accuracy.
+- *Automatic Documentation Generation*: The package does not automatically generate documentation websites or markdown files; it produces JSON output that can be used as a basis for further documentation tooling.
+
+== 📖 Example Usage
+
+Below is an example of a TypeScript function with a parameter that is an interface, demonstrating how `@elfsquad/tsdoc-parser` handles nested properties in its output JSON.
+
+=== Input TypeScript
+
+[source,typescript]
+----
+interface SetName {
+  /*
+   * The user's name.
+  */
+  name: string;
+}
+
+class User {
+  private name: string;
+
+  /**
+   * Sets the user's name.
+   * @param name - The user's name.
+   *
+   * @example
+   * ```ts
+   * const user = new User();
+   * user.setName({ name: 'John Doe' });
+   * ```
+  */
+  public setName({ name }: SetName): void {
+    this.name = name;
+  }
+
+  /**
+   * Returns the user's name.
+   * @returns The user's name.
+   * @example
+   * ```ts
+   * const user = new User();
+   * user.setName({ name: 'John Doe' });
+   * user.getName(); // John Doe
+   * ```
+     @returns The user's name.
+  */
+  public getName(): string {
+    return this.name;
+  }
+}
+----
+
+=== Output JSON
+
+[source,json]
+----
+[
+  {
+    "methodName": "setName",
+    "description": "Sets the user's name.",
+    "example": {
+      "content": "const user = new User();\nuser.setName({ name: 'John Doe' });\n",
+      "language": "ts"
+    },
+    "parameters": [
+      {
+        "name": "{ name }",
+        "type": "SetName",
+        "description": "",
+        "required": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "string",
+            "description": "",
+            "required": true
+          }
+        ]
+      }
+    ],
+    "deprecated": null,
+    "returns": {
+      "type": "void",
+      "description": ""
+    }
+  },
+  {
+    "methodName": "getName",
+    "description": "Returns the user's name.",
+    "example": {
+      "content": "const user = new User();\nuser.setName({ name: 'John Doe' });\nuser.getName(); // John Doe\n",
+      "language": "ts"
+    },
+    "parameters": [],
+    "deprecated": null,
+    "returns": {
+      "type": "string",
+      "description": "The user's name."
+    }
+  }
+]
+----
+
+This JSON output illustrates the detailed documentation generated by `@elfsquad/tsdoc-parser`, including nested parameters and their descriptions, types, and required status.
+
+== 🤝 Contributing
+
+Contributions to `@elfsquad/tsdoc-parser` are welcome. If you have suggestions for overcoming these limitations or other improvements, please feel free to submit an issue or pull request on the package's repository.
+
+== 📄 License
+
+`@elfsquad/tsdoc-parser` is available under the AGPL-3.0 license. See the LICENSE file in the repository for more details.
+
